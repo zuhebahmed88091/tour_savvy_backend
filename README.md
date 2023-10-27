@@ -1,24 +1,27 @@
-# README
+# Tour Savvy App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Authors:
 
-* Ruby version
+👤 **Marvin Otieno**
 
-* System dependencies
+- [GitHub](https://github.com/marvin-nyalik)
+- [WellFound](https://wellfound.com/u/marvin-otieno)
+- [Twitter](https://twitter.com/NyalikMarvin)
 
-* Configuration
+👤 **MD. Nohain Islam**
+- GitHub: [&nbsp; &nbsp; @githubhandle](https://github.com/Zafron047)
+- Twitter: [&nbsp; &nbsp; @twitterhandle](https://twitter.com/NohainZ)
+- LinkedIn: [&nbsp; LinkedIn](https://www.linkedin.com/in/nohain-islam/)
 
-* Database creation
+👤 **MesakDuduCoder**
 
-* Database initialization
+- GitHub: [@githubhandle](https://github.com/MesakDuduCoder)
+- Twitter: [@twitterhandle](https://twitter.com/mesak_10)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mesak-lalrindika/)
 
-* How to run the test suite
+👤 **Zuheb Ahmed**
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- GitHub: [&nbsp; &nbsp; @githubhandle](https://github.com/zuhebahmed88091)
+- Twitter: [&nbsp; &nbsp; @twitterhandle](https://twitter.com/ZuhebAhmed88091)
+- LinkedIn: [&nbsp; LinkedIn](https://www.linkedin.com/in/zuheb-ahmed/)
