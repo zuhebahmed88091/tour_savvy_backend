@@ -1,3 +1,3 @@
 class Package < ApplicationRecord
-  belongs_to :reservation
+  has_many :reservations, dependent: :destroy
 end
