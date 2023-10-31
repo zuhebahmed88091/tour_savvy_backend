@@ -11,7 +11,12 @@ class PackagesController < ApplicationController
 
   def create
     @package = Package.create(package_params)
-    render json: @package
+
+    if @package.save
+      render json: @package, status: :created
+    else
+      render json: { errors: @package.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -29,6 +34,6 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.require(:package).permit(:name, :description, :price, :image_url)
+    params.require(:package).permit(:name, :description, :price, :image, package_type: %i[name description price])
   end
 end

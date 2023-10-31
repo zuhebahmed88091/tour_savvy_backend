@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_28_170602) do
   create_table "reservations", force: :cascade do |t|
     t.date "reservation_date"
     t.string "city_name"
+    t.string "package_type"
     t.bigint "user_id", null: false
     t.bigint "package_id", null: false
     t.datetime "created_at", null: false
