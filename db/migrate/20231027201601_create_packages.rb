@@ -5,6 +5,7 @@ class CreatePackages < ActiveRecord::Migration[7.0]
       t.text :description
       t.string :image
       t.jsonb :package_type, default: []
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

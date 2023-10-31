@@ -10,7 +10,8 @@ class PackagesController < ApplicationController
   end
 
   def create
-    @package = Package.create(package_params)
+    user_id = current_user.id
+    @package = Package.create(package_params, user_id: user_id)
 
     if @package.save
       render json: @package, status: :created
