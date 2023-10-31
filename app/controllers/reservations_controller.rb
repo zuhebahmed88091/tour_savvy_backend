@@ -10,8 +10,18 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.create(reservation_params)
-    render json: reservation
+    current_user.id
+    reservation_params = params.require(:reservation).permit(:city_name, :reservation_date, :package_name,
+                                                             :package_type)
+    package_name = params.dig(:reservation, :package_name)
+    @package = Package.find_by(name: package_name)
+    @reservation = current_user.reservations.build(reservation_params)
+    @package.reservations << @reservation
+    if @package.save
+      render json: @reservation
+    else
+      render json: { errors: reservation.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -24,11 +34,5 @@ class ReservationsController < ApplicationController
     reservation = Reservation.find(params[:id])
     reservation.destroy
     render json: reservation
-  end
-
-  private
-
-  def reservation_params
-    params.require(:reservation).permit(:user_id, :restaurant_id, :date, :time, :party_size)
   end
 end
