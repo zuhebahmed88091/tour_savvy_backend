@@ -10,8 +10,14 @@ class PackagesController < ApplicationController
   end
 
   def create
-    user_id = current_user.id
-    @package = Package.create(package_params, user_id: user_id)
+    @package = Package.new(package_params)
+    @package.user_id = current_user.id
+
+    if @package.save
+      render json: @package, status: :created
+    else
+      render json: { errors: @package.errors.full_messages }, status: :unprocessable_entity
+    end
 
     if @package.save
       render json: @package, status: :created
