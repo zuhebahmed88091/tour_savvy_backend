@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'set_current_user', to: 'current_user#index'
+  post 'login', to: 'current_user#login'
   resources :packages
   resources :reservations
 end
