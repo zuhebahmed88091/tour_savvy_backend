@@ -9,8 +9,9 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    reservation = Reservation.includes(:package).find(params[:id])
-    render json: reservation, include: { package: {} }
+    reservation = Reservation.find(params[:id])
+    package = reservation.packages
+    render json: { reservation:, package: }
   end
 
   def create
