@@ -1,16 +1,19 @@
-class CurrentUserController < ApplicationController
+require 'securerandom'
+
+class UsersController < ApplicationController
   def login
     username = login_params[:username]
     user = User.find_by(username:)
     if user
-      @current_user = user
-      render json: @current_user
+      user_token = SecureRandom.uuid
+      user.update(user_token:)
+      render json: { user:, token: user_token }
     else
       render json: { error: 'Invalid username' }, status: :unprocessable_entity
     end
   end
 
-  def create
+  def signup
     user = User.new(registration_params)
 
     if user.save

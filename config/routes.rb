@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  post 'login', to: 'current_user#login'
-  post 'register', to: 'current_user#create'
-  resources :packages
-  resources :reservations
+  resources :users, defaults: { format: 'json' }
+  resources :packages, defaults: { format: 'json' }
+  resources :reservations, defaults: { format: 'json' }
+  post 'login', to: 'users#login', defaults: { format: 'json' }
+  post 'signup', to: 'users#signup', defaults: { format: 'json' }
 end

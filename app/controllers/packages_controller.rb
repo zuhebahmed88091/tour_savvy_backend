@@ -11,14 +11,7 @@ class PackagesController < ApplicationController
 
   def create
     @package = Package.new(package_params)
-    @package.user_id = current_user.id
-
-    if @package.save
-      render json: @package, status: :created
-    else
-      render json: { errors: @package.errors.full_messages }, status: :unprocessable_entity
-    end
-
+    @package.user_id = @current_user.id
     if @package.save
       render json: @package, status: :created
     else
@@ -34,6 +27,11 @@ class PackagesController < ApplicationController
 
   def destroy
     @package = Package.find(params[:id])
+    if @package.reservations.any?
+      @package.reservations.each do |reservation|
+        reservation.packages.delete(@package)
+      end
+    end
     @package.destroy
     render json: @package
   end
