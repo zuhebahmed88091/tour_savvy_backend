@@ -10,8 +10,15 @@ class ReservationsController < ApplicationController
 
   def show
     reservation = Reservation.find(params[:id])
-    package = reservation.packages
-    render json: { reservation:, package: }
+    packages = reservation.packages
+
+    if params[:type]
+      desired_package_type = params[:type]
+      price = packages.first['package_type'].find { |type| type['name'] == desired_package_type }['price']
+      render json: { reservation:, packages:, price: }
+    else
+      render json: { reservation:, packages: }
+    end
   end
 
   def create
