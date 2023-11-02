@@ -1,10 +1,11 @@
 require 'securerandom'
-
 class UsersController < ApplicationController
   def login
-    username = login_params[:username]
+    username = params[:user][:username]
+    password = params[:user][:password]
     user = User.find_by(username:)
-    if user
+    
+    if user&.authenticate(password)
       user_token = SecureRandom.uuid
       user.update(user_token:)
       render json: { user:, token: user_token }
@@ -15,7 +16,6 @@ class UsersController < ApplicationController
 
   def signup
     user = User.new(registration_params)
-
     if user.save
       render json: user, status: :created
     else
@@ -25,11 +25,7 @@ class UsersController < ApplicationController
 
   private
 
-  def login_params
-    params.require(:user).permit(:username)
-  end
-
   def registration_params
-    params.require(:user).permit(:username)
+    params.require(:user).permit(:username, :email, :password)
   end
 end
