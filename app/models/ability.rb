@@ -1,13 +1,12 @@
 class Ability
-    include CanCan::Ability
+  include CanCan::Ability
 
-    def initialize(user)
-      user ||= User.new
+  def initialize(user)
+    user ||= User.new
 
-      return unless user.admin?
+    return unless user.admin?
 
-      can :manage, :all
-      cannot :index, Reservation
-    end
-
+    can :manage, :all
+    cannot :index, Reservation
   end
+end

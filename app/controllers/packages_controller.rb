@@ -1,4 +1,6 @@
 class PackagesController < ApplicationController
+  before_action :authorize_admin, only: %i[create destroy]
+
   def index
     @packages = Package.all
     render json: @packages
@@ -11,7 +13,7 @@ class PackagesController < ApplicationController
 
   def create
     @package = Package.new(package_params)
-    authorize! :create, @package
+
     @package.user_id = @current_user.id
     if @package.save
       render json: @package, status: :created
@@ -28,21 +30,24 @@ class PackagesController < ApplicationController
 
   def destroy
     @package = Package.find(params[:id])
-    authorize! :destroy, @package
 
-    if @package.reservations.any?
-      @package.reservations.each do |reservation|
-        reservation.packages.delete(@package)
-      end
-    end
+    return unless @current_user.admin?
+
+    @package.reservations.each(&:destroy) if @package.reservations.any?
 
     @package.destroy
     render json: @package
   end
 
   private
-  
+
   def package_params
     params.require(:package).permit(:name, :description, :price, :image, package_type: %i[name description price])
+  end
+
+  def authorize_admin
+    return unless @current_user.nil? || !@current_user.admin?
+
+    render json: { error: 'You are not authorized to perform this action.' }, status: :forbidden
   end
 end

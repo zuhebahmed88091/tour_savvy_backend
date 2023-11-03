@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     username = params[:user][:username]
     password = params[:user][:password]
     user = User.find_by(username:)
-    
+
     if user&.authenticate(password)
       user_token = SecureRandom.uuid
       user.update(user_token:)
