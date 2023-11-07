@@ -26,7 +26,19 @@ class ReservationsController < ApplicationController
                                                              :package_type)
     package_name = params.dig(:reservation, :package_name)
     @package = Package.find_by(name: package_name)
-    @reservation = @current_user.reservations.build(reservation_params)
+
+    if @package.nil?
+      render json: { error: "Package with name '#{package_name}' not found" }, status: :unprocessable_entity
+      return
+    end
+
+    if @current_user
+      @reservation = @current_user.reservations.build(reservation_params)
+    else
+      @reservation = Reservation.new(reservation_params)
+      @reservation.user_id = 1
+    end
+
     @package.reservations << @reservation
     if @package.save
       render json: @reservation
@@ -43,7 +55,10 @@ class ReservationsController < ApplicationController
 
   def destroy
     reservation = Reservation.find(params[:id])
-    reservation.destroy
-    render json: reservation
+    if reservation.destroy
+      render json: { message: 'Reservation deleted successfully' }, status: :ok
+    else
+      render json: { errors: reservation.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 end
