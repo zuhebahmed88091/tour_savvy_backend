@@ -33,9 +33,9 @@ Tour_Savvy is a rails api app that allows operations like get, delete, post for 
 
 <details>
   <ul>
-    <li><a href="https://www.postgresql.org/">Postgresql</a></li>
-    <li><a href="https://rubyonrails.org/">Ruby on Rails</a></li>
-    <li><a href="https://rspec.info/">Rspec</a></li>
+    <li><a href="https://www.postgresql.org/">Postgresql v15.3</a></li>
+    <li><a href="https://rubyonrails.org/">Ruby on Rails v7.1.1</a></li>
+    <li><a href="https://rspec.info/">Rspec v3.12</a></li>
   </ul>
 </details>
 
@@ -156,7 +156,7 @@ You need to start server first to access api (rails server)
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/MesakDuduCoder/budget_app/issues).
+Feel free to check the [issues page](https://github.com/zuhebahmed88091/tour_savvy_backend/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
