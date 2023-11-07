@@ -1,5 +1,5 @@
 class PackagesController < ApplicationController
-  before_action :authorize_admin, only: %i[create destroy]
+  before_action :authorize_admin, only: %i[create destroy] if @current_user
 
   def index
     @packages = Package.all
@@ -14,7 +14,12 @@ class PackagesController < ApplicationController
   def create
     @package = Package.new(package_params)
 
-    @package.user_id = @current_user.id
+    @package.user_id = if @current_user
+                         @current_user.id
+                       else
+                         1
+                       end
+
     if @package.save
       render json: @package, status: :created
     else
@@ -22,21 +27,15 @@ class PackagesController < ApplicationController
     end
   end
 
-  def update
-    @package = Package.find(params[:id])
-    @package.update(package_params)
-    render json: @package
-  end
-
   def destroy
     @package = Package.find(params[:id])
-
-    return unless @current_user.admin?
-
     @package.reservations.each(&:destroy) if @package.reservations.any?
 
-    @package.destroy
-    render json: @package
+    if @package.destroy
+      render json: { message: 'Package deleted successfully' }, status: :ok
+    else
+      render json: { errors: @package.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private

@@ -6,22 +6,50 @@ info:
 paths:
   "/packages":
     get:
-      summary: Retrieves a list of packages
+      summary: list packages
       tags:
       - Packages
       responses:
         '200':
-          description: Packages found
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image:
+                      type: string
+                    package_type:
+                      type: array
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          price:
+                            type: integer
+                          description:
+                            type: string
+                    user_id:
+                      type: integer
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
     post:
-      summary: Creates a package
+      summary: create package
       tags:
       - Packages
       parameters: []
       responses:
         '201':
-          description: Package created
-        '422':
-          description: Invalid package data
+          description: successful
       requestBody:
         content:
           application/json:
@@ -35,37 +63,34 @@ paths:
                 image:
                   type: string
                 package_type:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    description:
-                      type: string
-                    price:
-                      type: number
-                  required:
-                  - name
-                  - description
-                  - price
+                  type: array
+                  items:
+                    properties:
+                      name:
+                        type: string
+                      price:
+                        type: integer
+                      description:
+                        type: string
               required:
               - name
               - description
               - image
               - package_type
   "/packages/{id}":
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
     get:
-      summary: Retrieves a package by ID
+      summary: a single package
       tags:
       - Packages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
-          description: Package found
+          description: successful
           content:
             application/json:
               schema:
@@ -80,77 +105,101 @@ paths:
                   image:
                     type: string
                   package_type:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      price:
-                        type: number
-    put:
-      summary: Updates a package
-      tags:
-      - Packages
-      parameters: []
-      responses:
-        '200':
-          description: Package updated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-                image:
-                  type: string
-                package_type:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    description:
-                      type: string
-                    price:
-                      type: number
-                  required:
-                  - name
-                  - description
-                  - price
-              required:
-              - name
-              - description
-              - image
-              - package_type
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        price:
+                          type: integer
+                        description:
+                          type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
     delete:
-      summary: Deletes a package
+      summary: delete package
       tags:
       - Packages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
-          description: Package deleted
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  package_type:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        price:
+                          type: integer
+                        description:
+                          type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
   "/reservations":
     get:
-      summary: Retrieves a list of reservations
+      summary: list reservations
       tags:
       - Reservations
       responses:
         '200':
-          description: reservations found
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    city_name:
+                      type: string
+                    reservation_date:
+                      type: string
+                    package_name:
+                      type: string
+                    package_type:
+                      type: string
+                    user_id:
+                      type: integer
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
     post:
-      summary: Creates a reservation
+      summary: create reservation
       tags:
       - Reservations
       parameters: []
       responses:
         '201':
-          description: reservation created
-        '422':
-          description: invalid reservation data
+          description: successful
       requestBody:
         content:
           application/json:
@@ -161,7 +210,6 @@ paths:
                   type: string
                 reservation_date:
                   type: string
-                  format: date
                 package_name:
                   type: string
                 package_type:
@@ -172,19 +220,19 @@ paths:
               - package_name
               - package_type
   "/reservations/{id}":
-    parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
     get:
-      summary: Retrieves a reservation by ID
+      summary: show reservation
       tags:
       - Reservations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
-          description: reservation found
+          description: successful
           content:
             application/json:
               schema:
@@ -196,69 +244,33 @@ paths:
                     type: string
                   reservation_date:
                     type: string
-                    format: date
                   package_name:
                     type: string
                   package_type:
                     type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '404':
+          description: invalid request
     delete:
-      summary: Deletes a reservation
+      summary: delete reservation
       tags:
       - Reservations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
-          description: reservation deleted
-  "/login":
-    post:
-      summary: Logs in a user
-      tags:
-      - Users
-      parameters: []
-      responses:
-        '200':
-          description: logged in successfully
-        '422':
-          description: invalid username
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-              required:
-              - username
-              - password
-  "/signup":
-    post:
-      summary: Signs up a user
-      tags:
-      - Users
-      parameters: []
-      responses:
-        '201':
-          description: user created
-        '422':
-          description: invalid user details
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                email:
-                  type: string
-                password:
-                  type: string
-              required:
-              - username
-              - email
-              - password
+          description: successful
+        '404':
+          description: invalid request
 servers:
 - url: http://{defaultHost}
   variables:
