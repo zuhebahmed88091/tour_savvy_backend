@@ -1,0 +1,266 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/packages":
+    get:
+      summary: Retrieves a list of packages
+      tags:
+      - Packages
+      responses:
+        '200':
+          description: Packages found
+    post:
+      summary: Creates a package
+      tags:
+      - Packages
+      parameters: []
+      responses:
+        '201':
+          description: Package created
+        '422':
+          description: Invalid package data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                image:
+                  type: string
+                package_type:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                  required:
+                  - name
+                  - description
+                  - price
+              required:
+              - name
+              - description
+              - image
+              - package_type
+  "/packages/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a package by ID
+      tags:
+      - Packages
+      responses:
+        '200':
+          description: Package found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  package_type:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      price:
+                        type: number
+    put:
+      summary: Updates a package
+      tags:
+      - Packages
+      parameters: []
+      responses:
+        '200':
+          description: Package updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                image:
+                  type: string
+                package_type:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                  required:
+                  - name
+                  - description
+                  - price
+              required:
+              - name
+              - description
+              - image
+              - package_type
+    delete:
+      summary: Deletes a package
+      tags:
+      - Packages
+      responses:
+        '200':
+          description: Package deleted
+  "/reservations":
+    get:
+      summary: Retrieves a list of reservations
+      tags:
+      - Reservations
+      responses:
+        '200':
+          description: reservations found
+    post:
+      summary: Creates a reservation
+      tags:
+      - Reservations
+      parameters: []
+      responses:
+        '201':
+          description: reservation created
+        '422':
+          description: invalid reservation data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city_name:
+                  type: string
+                reservation_date:
+                  type: string
+                  format: date
+                package_name:
+                  type: string
+                package_type:
+                  type: string
+              required:
+              - city_name
+              - reservation_date
+              - package_name
+              - package_type
+  "/reservations/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a reservation by ID
+      tags:
+      - Reservations
+      responses:
+        '200':
+          description: reservation found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  city_name:
+                    type: string
+                  reservation_date:
+                    type: string
+                    format: date
+                  package_name:
+                    type: string
+                  package_type:
+                    type: string
+    delete:
+      summary: Deletes a reservation
+      tags:
+      - Reservations
+      responses:
+        '200':
+          description: reservation deleted
+  "/login":
+    post:
+      summary: Logs in a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: logged in successfully
+        '422':
+          description: invalid username
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - password
+  "/signup":
+    post:
+      summary: Signs up a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user created
+        '422':
+          description: invalid user details
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - email
+              - password
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
