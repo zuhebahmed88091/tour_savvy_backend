@@ -14,6 +14,7 @@
   - [Usage](#usage)
   - [Run tests](#run-tests)
   - [Api documentation](#api-doc)
+- [👥 Kanabn](#kanban)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -47,7 +48,7 @@ Tour_Savvy is a rails api app that allows operations like get, delete, post for 
 - **Index and Show Reservations**
 - **Add/Remove Reservation**
 - **Add/Remove Package**
-- **Authentication and authorization**
+- **Authentication**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,6 +84,13 @@ Install this project with:
   bundle install
 ```
 
+### Database setup:
+Run these commands to create and update database
+```
+rails db:create
+rails db:migrate
+rails db:seed
+```
 ### Usage
 
 To run the project, execute the following command:
@@ -108,13 +116,23 @@ Example command:
 The api documentation is only a simple demonstration to use full features you need to implement proper configuration on your frontend, you need to send back the token that is sent on login response data to subsequent api calls for api endpoints to work (except for get method of packages).
 You need to start server first to access api (rails server)
 
-[Api doc link](http://localhost:3000/api-docs/index.html)
+## _[Api doc link](http://localhost:3000/api-docs/index.html)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
 
-## 👥 Authors <a name="authors"></a>
+# Tour Savvy App
+
+
+## Kanban:
+## _[URL to the Kanban](http://localhost:3000/api-docs/index.html)_
+<br>
+<br>
+<img src="./kanban.png" alt="Image Alt Text">
+
+
+## Authors:
 
 👤 **Marvin Otieno**
 
@@ -123,21 +141,21 @@ You need to start server first to access api (rails server)
 - [Twitter](https://twitter.com/NyalikMarvin)
 
 👤 **MD. Nohain Islam**
-- GitHub: [&nbsp; &nbsp; @githubhandle](https://github.com/Zafron047)
-- Twitter: [&nbsp; &nbsp; @twitterhandle](https://twitter.com/NohainZ)
-- LinkedIn: [&nbsp; LinkedIn](https://www.linkedin.com/in/nohain-islam/)
+- [GitHub](https://github.com/Zafron047)
+- [Twitter](https://twitter.com/NohainZ)
+- [LinkedIn](https://www.linkedin.com/in/nohain-islam/)
 
 👤 **MesakDuduCoder**
 
-- GitHub: [@githubhandle](https://github.com/MesakDuduCoder)
-- Twitter: [@twitterhandle](https://twitter.com/mesak_10)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mesak-lalrindika/)
+- [GitHub](https://github.com/MesakDuduCoder)
+- [Twitter](https://twitter.com/mesak_10)
+- [LinkedIn](https://www.linkedin.com/in/mesak-lalrindika/)
 
 👤 **Zuheb Ahmed**
 
-- GitHub: [&nbsp; &nbsp; @githubhandle](https://github.com/zuhebahmed88091)
-- Twitter: [&nbsp; &nbsp; @twitterhandle](https://twitter.com/ZuhebAhmed88091)
-- LinkedIn: [&nbsp; LinkedIn](https://www.linkedin.com/in/zuheb-ahmed/)
+- [GitHub](https://github.com/zuhebahmed88091)
+- [Twitter](https://twitter.com/ZuhebAhmed88091)
+- [LinkedIn](https://www.linkedin.com/in/zuheb-ahmed/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -145,8 +163,9 @@ You need to start server first to access api (rails server)
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Search feature**
--[ ] **Archive transactions**
+**Search feature**
+<br>
+**Archive transactions**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
