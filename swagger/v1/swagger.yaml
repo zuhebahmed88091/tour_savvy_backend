@@ -1,0 +1,278 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/packages":
+    get:
+      summary: list packages
+      tags:
+      - Packages
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image:
+                      type: string
+                    package_type:
+                      type: array
+                      items:
+                        properties:
+                          name:
+                            type: string
+                          price:
+                            type: integer
+                          description:
+                            type: string
+                    user_id:
+                      type: integer
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+    post:
+      summary: create package
+      tags:
+      - Packages
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                image:
+                  type: string
+                package_type:
+                  type: array
+                  items:
+                    properties:
+                      name:
+                        type: string
+                      price:
+                        type: integer
+                      description:
+                        type: string
+              required:
+              - name
+              - description
+              - image
+              - package_type
+  "/packages/{id}":
+    get:
+      summary: a single package
+      tags:
+      - Packages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  package_type:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        price:
+                          type: integer
+                        description:
+                          type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+    delete:
+      summary: delete package
+      tags:
+      - Packages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  package_type:
+                    type: array
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        price:
+                          type: integer
+                        description:
+                          type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+  "/reservations":
+    get:
+      summary: list reservations
+      tags:
+      - Reservations
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    city_name:
+                      type: string
+                    reservation_date:
+                      type: string
+                    package_name:
+                      type: string
+                    package_type:
+                      type: string
+                    user_id:
+                      type: integer
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+    post:
+      summary: create reservation
+      tags:
+      - Reservations
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city_name:
+                  type: string
+                reservation_date:
+                  type: string
+                package_name:
+                  type: string
+                package_type:
+                  type: string
+              required:
+              - city_name
+              - reservation_date
+              - package_name
+              - package_type
+  "/reservations/{id}":
+    get:
+      summary: show reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  city_name:
+                    type: string
+                  reservation_date:
+                    type: string
+                  package_name:
+                    type: string
+                  package_type:
+                    type: string
+                  user_id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '404':
+          description: invalid request
+    delete:
+      summary: delete reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: invalid request
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
