@@ -1,6 +1,5 @@
 # Tour Savvy App
 
-
 ## Authors:
 
 👤 **Marvin Otieno**

@@ -85,6 +85,4 @@ test:
 #
 production:
   <<: *default
-  database: tour_savvy_backend_production
-  username: postgres
-  password: <%= ENV["tourSavvy"] %>
+  url: <%= ENV['DATABASE_URL'] %>
